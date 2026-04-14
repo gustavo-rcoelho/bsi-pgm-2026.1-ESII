@@ -22,22 +22,6 @@ emprestimos/
 └── emprestimos.py         ← toda a lógica do sistema em um único arquivo
 ```
 
-### 2.1 Estrutura planejada (v2.0)
-
-```
-emprestimos/
-├── main.py
-├── models/
-│   ├── equipamento.py
-│   └── emprestimo.py
-├── services/
-│   └── servico_emprestimo.py
-├── repositories/
-│   └── repositorio_emprestimo.py
-└── tests/
-    └── test_servico_emprestimo.py
-```
-
 ---
 
 ## 3. Diagrama de Classes (v1.0)
@@ -61,50 +45,11 @@ Variáveis globais (fora da classe):
   emprestimos_registrados  : list[dict]
 ```
 
-> **Observação do desenvolvedor:** O uso de variáveis globais e dicionários em vez de classes de domínio foi uma decisão de velocidade de entrega. Gera acoplamento por conteúdo — a ser corrigido na v2.0.
+> **Observação do desenvolvedor:** O uso de variáveis globais e dicionários em vez de classes de domínio foi uma decisão de velocidade de entrega. As consequências estão registradas na tabela de dívida técnica (seção 5).
 
 ---
 
-## 4. Diagrama de Classes Planejado (v2.0)
-
-```
-┌──────────────────┐        ┌───────────────────────────┐
-│   Equipamento    │        │     ServicoEmprestimo      │
-├──────────────────┤        ├───────────────────────────┤
-│ id: int          │        │ repositorio               │
-│ nome: str        │        │ notificador               │
-│ tipo: str        │        ├───────────────────────────┤
-│ disponivel: bool │        │ + registrar()             │
-├──────────────────┤        │ + devolver()              │
-│ + calcular_multa │        │ + listar_atrasados()      │
-│   (dias): float  │        └───────────────────────────┘
-└──────────────────┘                    │
-        ▲                               │ usa
-        │                               ▼
-   ┌────┴──────┐        ┌──────────────────────────────┐
-   │ Notebook  │        │   RepositorioEmprestimo      │
-   │ Projetor  │        ├──────────────────────────────┤
-   │ Cabo      │        │ + salvar()                   │
-   └───────────┘        │ + buscar_por_id()            │
-                        │ + listar_atrasados()         │
-                        └──────────────────────────────┘
-
-┌──────────────────────┐
-│      Emprestimo      │
-├──────────────────────┤
-│ id: int              │
-│ equipamento_id: int  │
-│ usuario_nome: str    │
-│ usuario_email: str   │
-│ data_emprestimo: date│
-│ data_devolucao: date │
-│ devolvido: bool      │
-└──────────────────────┘
-```
-
----
-
-## 5. Decisões de Projeto Registradas
+## 4. Decisões de Projeto Registradas
 
 | ID | Decisão | Justificativa | Consequência conhecida |
 |---|---|---|---|
@@ -116,7 +61,7 @@ Variáveis globais (fora da classe):
 
 ---
 
-## 6. Dívida Técnica Registrada
+## 5. Dívida Técnica Registrada
 
 | ID | Problema | Prioridade para v2.0 |
 |---|---|---|
@@ -130,7 +75,7 @@ Variáveis globais (fora da classe):
 
 ---
 
-## 7. Tecnologias Utilizadas
+## 6. Tecnologias Utilizadas
 
 | Tecnologia | Versão | Uso |
 |---|---|---|
@@ -141,13 +86,13 @@ Variáveis globais (fora da classe):
 
 ---
 
-## 8. Como Executar os Testes
+## 7. Como Executar os Testes
 
 > Testes automatizados não implementados na v1.0. Previstos para v2.0 com pytest.
 
 ---
 
-## 9. Histórico de Versões
+## 8. Histórico de Versões
 
 | Versão | Data | Responsável | Descrição |
 |---|---|---|---|
