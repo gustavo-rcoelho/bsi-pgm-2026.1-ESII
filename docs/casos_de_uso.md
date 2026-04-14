@@ -7,28 +7,30 @@
 ---
 
 ## Diagrama de Atores
-┌────────────────────────────────────────────┐
-│ Sistema de Empréstimos │
-│ │
-│ [UC01 Registrar Empréstimo] │
-│ [UC02 Registrar Devolução] │
-│ [UC03 Listar Empréstimos em Atraso] │
-│ │
-└────────────────────────────────────────────┘
-▲ ▲
-│ │
-Atendente de TI Coordenador de TI
 
-text
+```
+┌────────────────────────────────────────────┐
+│          Sistema de Empréstimos            │
+│                                            │
+│   [UC01 Registrar Empréstimo         ]     │
+│   [UC02 Registrar Devolução          ]     │
+│   [UC03 Listar Empréstimos em Atraso ]     │
+│                                            │
+└────────────────────────────────────────────┘
+          ▲                    ▲
+          │                    │
+   Atendente de TI      Coordenador de TI
+```
 
 ---
 
 ## UC01 — Registrar Empréstimo
 
 **Ator principal:** Atendente de TI
+
 **Pré-condição:** O equipamento solicitado está disponível no sistema.
-**Pós-condição:** O empréstimo é registrado; o equipamento fica indisponível;
-o solicitante recebe notificação por e-mail.
+
+**Pós-condição:** O empréstimo é registrado; o equipamento fica indisponível; o solicitante recebe notificação por e-mail.
 
 ### Fluxo Principal
 
@@ -41,13 +43,13 @@ o solicitante recebe notificação por e-mail.
 7. Atendente informa o e-mail.
 8. Sistema solicita a quantidade de dias do empréstimo.
 9. Atendente informa a quantidade de dias.
-10. Sistema registra o empréstimo, marca o equipamento como indisponível
-    e exibe a data de devolução prevista.
+10. Sistema registra o empréstimo, marca o equipamento como indisponível e exibe a data de devolução prevista.
 11. Sistema notifica o solicitante por e-mail.
 
 ### Fluxo Alternativo A — Equipamento indisponível
 
 No passo 3, se o equipamento estiver indisponível:
+
 - Sistema exibe mensagem "Equipamento inválido ou indisponível".
 - Caso de uso encerra sem registrar.
 
@@ -56,9 +58,10 @@ No passo 3, se o equipamento estiver indisponível:
 ## UC02 — Registrar Devolução
 
 **Ator principal:** Atendente de TI
+
 **Pré-condição:** Existe um empréstimo ativo com o identificador informado.
-**Pós-condição:** A devolução é registrada; o equipamento fica disponível;
-multa calculada (se houver atraso); solicitante notificado.
+
+**Pós-condição:** A devolução é registrada; o equipamento fica disponível; multa calculada (se houver atraso); solicitante notificado.
 
 ### Fluxo Principal
 
@@ -75,6 +78,7 @@ multa calculada (se houver atraso); solicitante notificado.
 ### Fluxo Alternativo A — Empréstimo inválido ou já devolvido
 
 No passo 4, se o empréstimo não existir ou já tiver sido devolvido:
+
 - Sistema exibe mensagem "Empréstimo inválido ou já devolvido".
 - Caso de uso encerra sem registrar.
 
@@ -83,8 +87,9 @@ No passo 4, se o empréstimo não existir ou já tiver sido devolvido:
 ## UC03 — Listar Empréstimos em Atraso
 
 **Ator principal:** Coordenador de TI
-**Pré-condição:** Existem empréstimos com data de devolução vencida e
-não devolvidos.
+
+**Pré-condição:** Existem empréstimos com data de devolução vencida e não devolvidos.
+
 **Pós-condição:** Lista exibida; solicitantes em atraso notificados por e-mail.
 
 ### Fluxo Principal

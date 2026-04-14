@@ -9,99 +9,98 @@
 
 ## 1. Visão Geral da Arquitetura
 
-O sistema foi desenvolvido como uma aplicação Python de linha de comando.
-A versão 1.0 concentra toda a lógica em um único arquivo (`emprestimos.py`)
-por simplicidade de entrega no prazo estabelecido.
+O sistema foi desenvolvido como uma aplicação Python de linha de comando. A versão 1.0 concentra toda a lógica em um único arquivo (`emprestimos.py`) por simplicidade de entrega no prazo estabelecido.
 
-**Decisão de projeto registrada:** A equipe reconhece que a ausência de
-separação em camadas representa dívida técnica intencional. A refatoração
-para arquitetura em camadas está planejada para a v2.0.
+**Decisão de projeto registrada:** A equipe reconhece que a ausência de separação em camadas representa dívida técnica intencional. A refatoração para arquitetura em camadas está planejada para a v2.0.
 
 ---
 
 ## 2. Estrutura Atual (v1.0)
-emprestimos.py ← toda a lógica do sistema
 
-
+```
+emprestimos/
+└── emprestimos.py         ← toda a lógica do sistema em um único arquivo
+```
 
 ### 2.1 Estrutura planejada (v2.0)
+
+```
 emprestimos/
 ├── main.py
 ├── models/
-│ ├── equipamento.py
-│ └── emprestimo.py
+│   ├── equipamento.py
+│   └── emprestimo.py
 ├── services/
-│ └── servico_emprestimo.py
+│   └── servico_emprestimo.py
 ├── repositories/
-│ └── repositorio_emprestimo.py
+│   └── repositorio_emprestimo.py
 └── tests/
-└── test_servico_emprestimo.py
-
-
+    └── test_servico_emprestimo.py
+```
 
 ---
 
 ## 3. Diagrama de Classes (v1.0)
+
+```
 ┌─────────────────────────────────────────────────┐
-│ Sistema │
+│                    Sistema                       │
 ├─────────────────────────────────────────────────┤
-│ │
-│ + registrar(equipamento_id, usuario_nome, │
-│ usuario_email, dias) : bool │
-│ + devolver(emprestimo_id) : void │
-│ + listar_atrasados() : void │
-│ │
-│ [acessa diretamente as variáveis globais │
-│ equipamentos[] e emprestimos_registrados[]] │
+│                                                  │
+│ + registrar(equipamento_id, usuario_nome,        │
+│             usuario_email, dias) : bool          │
+│ + devolver(emprestimo_id) : void                 │
+│ + listar_atrasados() : void                      │
+│                                                  │
+│ [acessa diretamente as variáveis globais         │
+│  equipamentos[] e emprestimos_registrados[]]     │
 └─────────────────────────────────────────────────┘
 
-variáveis globais (fora da classe):
-equipamentos : list[dict]
-emprestimos_registrados : list[dict]
+Variáveis globais (fora da classe):
+  equipamentos             : list[dict]
+  emprestimos_registrados  : list[dict]
+```
 
-
-
-**Observação do desenvolvedor:** O uso de variáveis globais e dicionários
-em vez de classes de domínio foi uma decisão de velocidade de entrega.
-Gera acoplamento por conteúdo — a ser corrigido na v2.0.
+> **Observação do desenvolvedor:** O uso de variáveis globais e dicionários em vez de classes de domínio foi uma decisão de velocidade de entrega. Gera acoplamento por conteúdo — a ser corrigido na v2.0.
 
 ---
 
 ## 4. Diagrama de Classes Planejado (v2.0)
-┌──────────────────┐ ┌───────────────────────────┐
-│ Equipamento │ │ ServicoEmprestimo │
-├──────────────────┤ ├───────────────────────────┤
-│ id: int │ │ repositorio │
-│ nome: str │ │ notificador │
-│ tipo: str │ ├───────────────────────────┤
-│ disponivel: bool │ │ + registrar() │
-├──────────────────┤ │ + devolver() │
-│ + calcular_multa │ │ + listar_atrasados() │
-│ (dias): float │ └───────────────────────────┘
-└──────────────────┘ │
-▲ │ usa
-│ ▼
-┌────┴──────┐ ┌──────────────────────────────┐
-│ Notebook │ │ RepositorioEmprestimo │
-│ Projetor │ ├──────────────────────────────┤
-│ Cabo │ │ + salvar() │
-└───────────┘ │ + buscar_por_id() │
-│ + listar_atrasados() │
-└──────────────────────────────┘
+
+```
+┌──────────────────┐        ┌───────────────────────────┐
+│   Equipamento    │        │     ServicoEmprestimo      │
+├──────────────────┤        ├───────────────────────────┤
+│ id: int          │        │ repositorio               │
+│ nome: str        │        │ notificador               │
+│ tipo: str        │        ├───────────────────────────┤
+│ disponivel: bool │        │ + registrar()             │
+├──────────────────┤        │ + devolver()              │
+│ + calcular_multa │        │ + listar_atrasados()      │
+│   (dias): float  │        └───────────────────────────┘
+└──────────────────┘                    │
+        ▲                               │ usa
+        │                               ▼
+   ┌────┴──────┐        ┌──────────────────────────────┐
+   │ Notebook  │        │   RepositorioEmprestimo      │
+   │ Projetor  │        ├──────────────────────────────┤
+   │ Cabo      │        │ + salvar()                   │
+   └───────────┘        │ + buscar_por_id()            │
+                        │ + listar_atrasados()         │
+                        └──────────────────────────────┘
 
 ┌──────────────────────┐
-│ Emprestimo │
+│      Emprestimo      │
 ├──────────────────────┤
-│ id: int │
-│ equipamento_id: int │
-│ usuario_nome: str │
-│ usuario_email: str │
+│ id: int              │
+│ equipamento_id: int  │
+│ usuario_nome: str    │
+│ usuario_email: str   │
 │ data_emprestimo: date│
 │ data_devolucao: date │
-│ devolvido: bool │
+│ devolvido: bool      │
 └──────────────────────┘
-
-
+```
 
 ---
 
@@ -119,7 +118,7 @@ Gera acoplamento por conteúdo — a ser corrigido na v2.0.
 
 ## 6. Dívida Técnica Registrada
 
-| Item | Problema | Prioridade para v2.0 |
+| ID | Problema | Prioridade para v2.0 |
 |---|---|---|
 | DT01 | Ausência de camadas de arquitetura | Alta |
 | DT02 | Variáveis globais acessadas diretamente pela classe | Alta |
@@ -144,8 +143,7 @@ Gera acoplamento por conteúdo — a ser corrigido na v2.0.
 
 ## 8. Como Executar os Testes
 
-*Testes automatizados não implementados na v1.0.*
-*Previstos para v2.0 com pytest.*
+> Testes automatizados não implementados na v1.0. Previstos para v2.0 com pytest.
 
 ---
 

@@ -11,17 +11,11 @@
 
 ### 1.1 Propósito
 
-Este documento descreve a visão geral do Sistema de Gestão de Empréstimo
-de Equipamentos da UFRA Paragominas. Seu objetivo é estabelecer os problemas
-que o sistema resolve, os envolvidos, as necessidades identificadas e as
-principais funcionalidades esperadas.
+Este documento descreve a visão geral do Sistema de Gestão de Empréstimo de Equipamentos da UFRA Paragominas. Seu objetivo é estabelecer os problemas que o sistema resolve, os envolvidos, as necessidades identificadas e as principais funcionalidades esperadas.
 
 ### 1.2 Escopo
 
-O sistema controla o empréstimo de equipamentos audiovisuais e de informática
-do campus (notebooks, projetores e cabos HDMI) para professores e técnicos
-administrativos. O sistema não cobre contratos de longo prazo, empréstimos
-externos ao campus, nem controle de estoque ou manutenção.
+O sistema controla o empréstimo de equipamentos audiovisuais e de informática do campus (notebooks, projetores e cabos HDMI) para professores e técnicos administrativos. O sistema não cobre contratos de longo prazo, empréstimos externos ao campus, nem controle de estoque ou manutenção.
 
 ---
 
@@ -52,13 +46,11 @@ externos ao campus, nem controle de estoque ou manutenção.
 
 ### 4.1 Perspectiva do produto
 
-O sistema é uma aplicação de linha de comando (CLI) executada localmente
-na máquina do atendente de TI. Não há acesso remoto ou interface web nesta versão.
+O sistema é uma aplicação de linha de comando (CLI) executada localmente na máquina do atendente de TI. Não há acesso remoto ou interface web nesta versão.
 
 ### 4.2 Premissas e dependências
 
-- Os dados são armazenados em memória durante a execução. Não há persistência
-  entre sessões na versão 1.0 (previsto para v2.0).
+- Os dados são armazenados em memória durante a execução. Não há persistência entre sessões na versão 1.0 (previsto para v2.0).
 - O envio de e-mail de notificação é simulado via terminal nesta versão.
 
 ### 4.3 Principais funcionalidades

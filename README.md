@@ -5,11 +5,11 @@ Sistema desenvolvido para controle de empréstimo de equipamentos do campus
 
 ## Equipe
 
-| Nome              | Função                  |
-|-------------------|-------------------------|
-| João Silva        | Desenvolvedor Backend   |
-| Maria Souza       | Analista de Requisitos  |
-| Pedro Lima        | Testador / QA           |
+| Nome         | Função                  |
+|--------------|-------------------------|
+| João Silva   | Desenvolvedor Backend   |
+| Maria Souza  | Analista de Requisitos  |
+| Pedro Lima   | Testador / QA           |
 
 ## Documentação
 
@@ -45,5 +45,4 @@ python emprestimos.py
 ## Observações
 
 Este sistema foi desenvolvido como versão inicial (v1.0).
-Melhorias de arquitetura e qualidade de código estão previstas
-para as próximas versões.
+Melhorias de arquitetura e qualidade de código estão previstas para as próximas versões.
