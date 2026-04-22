@@ -18,4 +18,4 @@ Não é necessário usar termos técnicos neste momento.
 
 ## Revisão com vocabulário técnico
 
-*(Este espaço será preenchido após a Aula 4, quando os termos técnicos corretos forem aprendidos)*
+(Este espaço será preenchido após a Aula 4, quando os termos técnicos corretos forem aprendidos)
