@@ -8,13 +8,11 @@ Não é necessário usar termos técnicos neste momento.
 
 ## Minha leitura inicial
 
-*(Espaço reservado para o estudante preencher)*
-
-Exemplo de entradas:
-- "A classe faz muita coisa ao mesmo tempo"
-- "Tem código de e-mail misturado com o cálculo de multa"
-- "O mesmo cálculo aparece duas vezes no código"
-- "As listas de equipamentos estão fora da classe, soltas no arquivo"
+- Não verifica o prazo mínimo de empréstimo, só aceita qualquer valor.
+- Não envia realmente para o email do usuário, só printa.
+- Na devolução, marca como "disponível = True" mas não retorna as informações como pedidas nos resquitos.
+- Mensagens de erro muito genéricas e pouco descritivas.
+- Usa o mesmo cálculo de multa nas funções devolver e listar_atrasados.
 
 ---
 
