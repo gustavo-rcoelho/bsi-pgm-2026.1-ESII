@@ -1,7 +1,7 @@
 # ADR-001: Arquitetura da v2.0 do Sistema de Empréstimos
 
 **Status:** Accepted  
-**Data:** 2026-02-XX
+**Data:** 2026-04-28
 
 ## Contexto
 
