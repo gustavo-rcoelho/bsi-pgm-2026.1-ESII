@@ -1,6 +1,6 @@
 # ADR-001: Arquitetura da v2.0 do Sistema de Empréstimos
 
-**Status:** Accepted  
+**Status:** Proposed 
 **Data:** 2026-04-28
 
 ## Contexto
@@ -47,7 +47,6 @@ Adotar **arquitetura em camadas**. A estrutura da v2.0 será organizada assim:
 - `models/`  
   Representações das entidades do domínio: `Equipamento`, `Emprestimo`, etc.
 
-Cada pasta conterá um arquivo `__init__.py` para permitir importação modular.
 
 ## Consequências
 
