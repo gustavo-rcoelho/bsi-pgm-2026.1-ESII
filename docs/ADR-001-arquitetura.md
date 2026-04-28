@@ -47,7 +47,7 @@ Adotar **arquitetura em camadas**. A estrutura da v2.0 será organizada assim:
   Regras de negócio (empréstimos, devoluções, cálculo de multa).  
   Independente de interface e persistência.
 
-- `repositories/`  
+- `repositorios/`  
   Persistência dos dados (listas, arquivos, futuro banco, etc.).  
   Pode ser substituído por repositório falso nos testes.
 
