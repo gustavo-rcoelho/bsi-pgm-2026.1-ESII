@@ -3,6 +3,13 @@
 **Status:** Proposed 
 **Data:** 2026-04-28
 
+| Critério                                                   | Arquivo único                     | Em camadas                                          | MVC                                                  |
+| ---------------------------------------------------------- | --------------------------------- | --------------------------------------------------- | ---------------------------------------------------- |
+| **Atende RNF03 (novo tipo sem modificar vários módulos)?** |  Não — tudo está misturado       |  Sim — regras ficam isoladas em services/models   |  Sim — modelos separados                           |
+| **Atende RNF04 (testar regras sem estado externo)?**       |  Não — depende de input, globals |  Sim — serviços podem receber repositórios falsos |  Sim — controllers podem ser testados isoladamente |
+| **Adequado para CLI sem interface gráfica?**               |  Sim                            |  Sim                                              |  Não — MVC é mais útil p/ GUI                       |
+| **Familiar para equipe iniciante?**                        |  Muito simples                  |  Complexidade moderada e compreensível            |  Alto custo e conceitos extras                      |
+
 ## Contexto
 
 A versão 1.0 foi construída em um único arquivo (`emprestimos.py`).  
