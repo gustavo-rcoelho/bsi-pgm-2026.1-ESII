@@ -1,0 +1,13 @@
+class ServicoEmprestimo:
+
+    def registrar(self, equip_id, nome, email, dias):
+        ...
+
+    def devolver(self, emprestimo_id):
+        ...
+
+    def listar_atrasados(self):
+        ...
+
+    def calcular_multa(self, emprestimo):
+        ...
