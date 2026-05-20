@@ -1,4 +1,4 @@
-from repositories.repositorio_emprestimo import RepositorioEmprestimo
+from repositorios.repositorio_emprestimo import RepositorioEmprestimo
 from services.notificador import Notificador
 from services.servico_emprestimo import ServicoEmprestimo
 
