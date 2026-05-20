@@ -1,5 +1,4 @@
 from models.equipamento import Notebook, Projetor, Cabo
-from models.emprestimo import Emprestimo
 import datetime
 
 class RepositorioEmprestimo:
