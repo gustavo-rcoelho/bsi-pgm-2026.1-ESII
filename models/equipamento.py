@@ -11,16 +11,14 @@ class Equipamento(ABC):
     @abstractmethod
     def calcular_multa(self, dias_atraso: int) -> float:
         pass
-        
+
 class Notebook(Equipamento):
     def calcular_multa(self, dias_atraso: int) -> float:
         return max(0, dias_atraso * 10.0)
 
-
 class Projetor(Equipamento):
     def calcular_multa(self, dias_atraso: int) -> float:
         return max(0, dias_atraso * 15.0)
-
 
 class Cabo(Equipamento):
     def calcular_multa(self, dias_atraso: int) -> float:

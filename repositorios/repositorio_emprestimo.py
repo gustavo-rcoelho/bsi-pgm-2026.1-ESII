@@ -1,4 +1,5 @@
 from models.equipamento import Notebook, Projetor, Cabo
+from models.emprestimo import Emprestimo
 import datetime
 
 class RepositorioEmprestimo:
@@ -7,9 +8,8 @@ class RepositorioEmprestimo:
         self.equipamentos = [
             Notebook(1, "Notebook Dell", "notebook", True),
             Projetor(2, "Projetor Epson", "projetor", True),
-            Cabo(3, "Cabo HDMI", "cabo", True),
+            Cabo(3, "Cabo HDMI", "cabo", True)
         ]
-
         self.emprestimos = []
 
     def buscar_equipamento(self, equip_id):
@@ -19,14 +19,14 @@ class RepositorioEmprestimo:
         return None
 
     def marcar_indisponivel(self, equip_id):
-        eq = self.buscar_equipamento(equip_id)
-        if eq:
-            eq.disponivel = False
+        equipamento = self.buscar_equipamento(equip_id)
+        if equipamento:
+            equipamento.disponivel = False
 
     def marcar_disponivel(self, equip_id):
-        eq = self.buscar_equipamento(equip_id)
-        if eq:
-            eq.disponivel = True
+        equipamento = self.buscar_equipamento(equip_id)
+        if equipamento:
+            equipamento.disponivel = True
 
     def salvar_emprestimo(self, emprestimo: Emprestimo):
         self.emprestimos.append(emprestimo)
@@ -38,9 +38,9 @@ class RepositorioEmprestimo:
         return None
 
     def marcar_devolvido(self, emprestimo_id):
-        emp = self.buscar_emprestimo(emprestimo_id)
-        if emp:
-            emp.devolvido = True
+        emprestimo = self.buscar_emprestimo(emprestimo_id)
+        if emprestimo:
+            emprestimo.devolvido = True
 
     def listar_emprestimos(self):
         return self.emprestimos
