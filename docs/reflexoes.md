@@ -29,7 +29,7 @@ Segundo Valente (Cap. 5), uma subclasse satisfaz LSP quando pode ser usada no lu
 classe pai sem quebrar o funcionamento do sistema. Este é exatamente o caso: o
 ServicoEmprestimo funciona corretamente com qualquer subclasse de Equipamento.
 
-## Aula 06 — Verificação de LSP 
+## Aula 06 — DIP     
 
  Antes da refatoração, o serviço de empréstimos dependia diretamente de implementações concretas do repositório e do notificador, o que tornava difícil testar o comportamento isoladamente. Para verificar um fluxo simples de empréstimo, era necessário usar o repositório real e um notificador real, criando efeitos colaterais indesejados. Isso viola o DIP porque o módulo de alto nível (Serviço) estava acoplado a detalhes de baixo nível.
 
