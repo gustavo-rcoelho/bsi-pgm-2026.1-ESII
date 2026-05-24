@@ -44,3 +44,4 @@ class RepositorioEmprestimo:
 
     def listar_emprestimos(self):
         return self.emprestimos
+    
