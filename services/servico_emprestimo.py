@@ -94,7 +94,6 @@ class ServicoEmprestimo:
 # --------------------------------------
 if __name__ == "__main__":
 
-    # Equipamento fake para testar
     class EquipamentoFalso:
         def __init__(self, id, nome, tipo):
             self.id = id
@@ -105,7 +104,7 @@ if __name__ == "__main__":
         def calcular_multa(self, dias_atraso):
             if dias_atraso <= 0:
                 return 0
-            return dias_atraso * 2   # multa de R$2 por dia (exemplo)
+            return dias_atraso * 2   
 
     class RepositorioFalso:
         def __init__(self):
@@ -152,7 +151,6 @@ if __name__ == "__main__":
         def notificar_atraso(self, email):
             self.logs.append(("atraso", email))
 
-    # ----- TESTE REAL -----
     repo = RepositorioFalso()
     noti = NotificadorFalso()
     serv = ServicoEmprestimo(repo, noti)
