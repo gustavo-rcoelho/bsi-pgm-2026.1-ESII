@@ -88,3 +88,77 @@ class ServicoEmprestimo:
         atraso = (hoje - emprestimo.data_devolucao).days
         equipamento = self.repo.buscar_equipamento(emprestimo.equipamento_id)
         return equipamento.calcular_multa(atraso)
+
+# --------------------------------------
+# TESTE DIP
+# --------------------------------------
+if __name__ == "__main__":
+
+    # Equipamento fake para testar
+    class EquipamentoFalso:
+        def __init__(self, id, nome, tipo):
+            self.id = id
+            self.nome = nome
+            self.tipo = tipo
+            self.disponivel = True
+
+        def calcular_multa(self, dias_atraso):
+            if dias_atraso <= 0:
+                return 0
+            return dias_atraso * 2   # multa de R$2 por dia (exemplo)
+
+    class RepositorioFalso:
+        def __init__(self):
+            self.equipamentos = {
+                1: EquipamentoFalso(1, "Notebook Dell", "eletronico")
+            }
+            self.emprestimos_salvos = []
+            self.indisponiveis = []
+
+        def buscar_equipamento(self, id):
+            return self.equipamentos.get(id)
+
+        @property
+        def emprestimos(self):
+            return self.emprestimos_salvos
+
+        def salvar_emprestimo(self, emp):
+            self.emprestimos_salvos.append(emp)
+
+        def marcar_indisponivel(self, id):
+            self.indisponiveis.append(id)
+
+        def marcar_disponivel(self, id):
+            pass
+
+        def buscar_emprestimo(self, id):
+            if 1 <= id <= len(self.emprestimos_salvos):
+                return self.emprestimos_salvos[id - 1]
+            return None
+
+        def listar_emprestimos(self):
+            return self.emprestimos_salvos
+
+    class NotificadorFalso:
+        def __init__(self):
+            self.logs = []
+
+        def notificar_emprestimo(self, email, data):
+            self.logs.append(("emprestimo", email, data))
+
+        def notificar_devolucao(self, email, multa):
+            self.logs.append(("devolucao", email, multa))
+
+        def notificar_atraso(self, email):
+            self.logs.append(("atraso", email))
+
+    # ----- TESTE REAL -----
+    repo = RepositorioFalso()
+    noti = NotificadorFalso()
+    serv = ServicoEmprestimo(repo, noti)
+
+    serv.registrar(1, "Ana", "ana@gmail.com", 5)
+
+    print("EMPRÉSTIMOS SALVOS:", repo.emprestimos_salvos)
+    print("INDISPONÍVEIS:", repo.indisponiveis)
+    print("LOGS:", noti.logs)
