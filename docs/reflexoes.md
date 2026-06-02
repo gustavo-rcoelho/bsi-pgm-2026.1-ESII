@@ -38,3 +38,13 @@ Após a aplicação do DIP, o serviço passou a depender apenas de abstrações 
 Segundo Valente (Cap. 5), o DIP “reduz o impacto das alterações em módulos concretos ao forçar que módulos estáveis dependam de abstrações”. Ele também destaca que a inversão de dependências é crucial para permitir testes automatizados de forma simples e confiável. A atividade demonstrou exatamente isso: substituindo implementações reais por dublês, o módulo de alto nível pôde ser testado de maneira previsível e isolada.
 
 Essa refatoração tornou o código mais flexível, menos acoplado e mais alinhado aos princípios de boas práticas de projeto.
+
+## Aula 08 — DIP com Interfaces
+
+A introdução de interfaces explícitas fortaleceu a aplicação do Princípio da Inversão de Dependências. Antes, o serviço de empréstimos dependia diretamente das implementações concretas de repositório e notificador. Após a criação das interfaces `IRepositorioEmprestimo` e `INotificador`, o serviço passou a depender apenas de abstrações. Isso reduz acoplamento e facilita substituições futuras.
+
+O teste com objetos falsos demonstrou uma das principais vantagens do DIP: a possibilidade de validar regras de negócio sem utilizar componentes reais do sistema. Dessa forma, o serviço pode ser testado de maneira isolada e previsível.
+
+Entretanto, ainda existem dependências concretas remanescentes, como o uso direto de `datetime.date.today()`, a instanciação direta de `Emprestimo` e o acesso ao atributo `repo.emprestimos`. Esses pontos mostram que a aplicação do DIP é gradual e pode ser ampliada conforme a evolução do projeto.
+
+Conforme discutido por Valente, a inversão de dependências busca reduzir o impacto de mudanças em módulos de baixo nível, permitindo que módulos de alto nível permaneçam estáveis. O uso de interfaces torna a arquitetura mais flexível, facilita testes e melhora a manutenção do software ao longo do tempo.
