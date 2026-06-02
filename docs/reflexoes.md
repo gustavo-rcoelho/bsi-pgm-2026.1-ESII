@@ -48,3 +48,9 @@ O teste com objetos falsos demonstrou uma das principais vantagens do DIP: a pos
 Entretanto, ainda existem dependências concretas remanescentes, como o uso direto de `datetime.date.today()`, a instanciação direta de `Emprestimo` e o acesso ao atributo `repo.emprestimos`. Esses pontos mostram que a aplicação do DIP é gradual e pode ser ampliada conforme a evolução do projeto.
 
 Conforme discutido por Valente, a inversão de dependências busca reduzir o impacto de mudanças em módulos de baixo nível, permitindo que módulos de alto nível permaneçam estáveis. O uso de interfaces torna a arquitetura mais flexível, facilita testes e melhora a manutenção do software ao longo do tempo.
+
+## Aula 08 — Testes
+
+Os testes de integração verificam a colaboração entre componentes reais do sistema. No caso do sistema de empréstimos, o teste de integração garante que o ServiçoEmprestimo consegue interagir corretamente com o RepositorioEmprestimo e com o Notificador, validando que os objetos se comunicam de forma adequada quando executados em conjunto. Esse tipo de teste captura problemas de configuração, dependências incorretas, falhas de integração e incompatibilidades entre módulos, situações que normalmente não aparecem em testes de unidade.
+
+Por outro lado, os testes de integração possuem menor capacidade de isolar defeitos. Quando um teste falha, pode ser mais difícil identificar exatamente qual componente causou o problema. Já os testes de unidade utilizam dublês como fakes e spies para isolar o comportamento da classe sob teste, permitindo validar regras específicas de negócio com maior precisão. Assim, testes de unidade são mais adequados para verificar cálculos de multa, regras de devolução e notificações individualmente, enquanto testes de integração garantem que o fluxo completo do sistema funciona corretamente quando os componentes reais são utilizados em conjunto.
