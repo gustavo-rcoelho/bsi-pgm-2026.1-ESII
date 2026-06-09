@@ -1,5 +1,7 @@
+#test_servico_emprestimo
 import datetime
 import pytest
+from models.equipamento import Notebook
 
 
 def test_registrar_devolve_true_quando_equipamento_disponivel(
@@ -117,3 +119,29 @@ def test_devolver_falha_silenciosamente_para_emprestimo_inexistente(
     resultado = servico.devolver(999)
 
     assert resultado is None
+
+def test_usuario_com_tres_emprestimos_nao_pode_registrar_quarto(
+    servico,
+    repositorio_fake
+):
+    servico.registrar(1, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+    Notebook(4, "Notebook Extra", "notebook", True)
+    )
+
+    servico.registrar(4, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+    Notebook(5, "Notebook Extra 2", "notebook", True)
+    )
+
+    servico.registrar(5, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+    Notebook(6, "Notebook Extra 3", "notebook", True)
+    )
+
+    resultado = servico.registrar(6, "Ana", "ana@x.com", 7)
+
+    assert resultado is False
