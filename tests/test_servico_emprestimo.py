@@ -145,3 +145,58 @@ def test_usuario_com_tres_emprestimos_nao_pode_registrar_quarto(
     resultado = servico.registrar(6, "Ana", "ana@x.com", 7)
 
     assert resultado is False
+
+def test_usuario_pode_registrar_novo_emprestimo_apos_devolucao(
+    servico,
+    repositorio_fake
+):
+    servico.registrar(1, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+        Notebook(4, "Notebook Extra", "notebook", True)
+    )
+    servico.registrar(4, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+        Notebook(5, "Notebook Extra 2", "notebook", True)
+    )
+    servico.registrar(5, "Ana", "ana@x.com", 7)
+
+    servico.devolver(1)
+
+    repositorio_fake._equipamentos.append(
+        Notebook(6, "Notebook Extra 3", "notebook", True)
+    )
+
+    resultado = servico.registrar(6, "Ana", "ana@x.com", 7)
+
+    assert resultado is True
+    
+def test_limite_de_emprestimos_e_por_usuario(
+    servico,
+    repositorio_fake
+):
+    servico.registrar(1, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+        Notebook(4, "Notebook Extra", "notebook", True)
+    )
+    servico.registrar(4, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+        Notebook(5, "Notebook Extra 2", "notebook", True)
+    )
+    servico.registrar(5, "Ana", "ana@x.com", 7)
+
+    repositorio_fake._equipamentos.append(
+        Notebook(6, "Notebook João", "notebook", True)
+    )
+
+    resultado = servico.registrar(
+        6,
+        "João",
+        "joao@x.com",
+        7
+    )
+
+    assert resultado is True

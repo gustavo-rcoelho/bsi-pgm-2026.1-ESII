@@ -1,0 +1,66 @@
+[33m9c3fd4c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32maula-09[m[33m)[m feat: limita usuario a tres emprestimos simultaneos
+[33m7a33709[m refactor: max() garante multa nao-negativa (ciclo 3)
+[33m75cb357[m feat: cobra dias alem da carencia (ciclo 2)
+[33m1f56c47[m feat: multa zero quando sem atraso (ciclo 1)
+[33meae44b8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m ci: adiciona pipeline básico no GitHub Actions
+[33me74fd9f[m tests/integration/test_fluxo_completo.py + reflexão em docs/reflexoes.md → pytest verde
+[33m3696b0a[m test: adiciona testes de unidade com fixtures e parametrize (taxonomia de dublês)
+[33m6606d1f[m  tests/ + requirements-dev.txt + pytest.ini → pytest --collect-only funciona
+[33m3e19b7b[m build: configura pytest e pytest-cov
+[33m2357748[m Aplica DIP com interfaces explícitas
+[33me4ed5da[m  repositories/interfaces.py + services/interfaces.py criados; concretas herdando; service anotado → python main.py funcionando
+[33md856801[m Update repositorio_emprestimo.py
+[33m5563412[m Aplica DIP: dependências injetadas; código agora é testável
+[33m6a3558e[m Aplica DIP: dependências injetadas; código agora é testável
+[33mb0ee6f1[m Aplica DIP: dependências injetadas; código agora é testável
+[33m601317b[m Merge branch 'main' of https://github.com/gustavo-rcoelho/bsi-pgm-2026.1-ESII
+[33m3361296[m .
+[33m7f8e85c[m Aplica OCP: polimorfismo elimina if/elif e duplicação de multa
+[33mb163e66[m Aplica OCP: polimorfismo elimina if/elif e duplicação de multa
+[33mbc24aec[m emprestimos
+[33md4c3c2b[m Update emprestimo.py
+[33md6e1827[m m
+[33m83e0a17[m Aplica OCP: polimorfismo elimina if/elif e duplicação de multa
+[33m4d418a7[m Implement notification methods in Notificador class
+[33m78455cf[m Implement main function for loan management system
+[33m4cbea63[m Implementar funcionalidades de registro e devolução de empréstimos
+[33m787474f[m Refactor RepositorioEmprestimo with new methods
+[33md98d702[m Refactor Equipamento class to be abstract with subclasses
+[33m2c19ec1[m Update PROBLEMAS.md
+[33m1bbec88[m Rename repositorio_emprestimos.py to repositorio_emprestimo.py
+[33me7671f8[m Criado repositorio_emprestimos.py
+[33m18b6482[m Criado notificador.py
+[33mc089957[m criado servico_emprestimo.py
+[33m4d22f7a[m Criado emprestimo.py
+[33me4d95ea[m Criado equipamento.py
+[33mfd74535[m Adicionado o Diagrama de Decomposição
+[33m3d00a13[m Update diagramas.md
+[33m3349a99[m Create diagramas.md
+[33m0b386da[m Update ADR-001-arquitetura.md
+[33m47341a5[m Create __init__.py
+[33mc527da9[m Create __init__.py
+[33m9a83027[m Create __init__.py
+[33maa3b217[m Delete models
+[33m665bf06[m Create models
+[33m3f735de[m Add comment about future menu implementation
+[33m5b6b005[m Enhance ADR-001 with architectural criteria comparison
+[33m03951ec[m Change status to 'Proposed' in ADR-001
+[33m19223a8[m Update ADR-001-arquitetura.md
+[33m4423a08[m Adiciona ADR-001 sobre arquitetura da v2.0
+[33m33f8616[m Merge branch 'fab-araujo:main' into main
+[33m78c8c63[m Create ADR-001-arquitetura.md
+[33m9bbfd76[m Create PROBLEMAS.md
+[33ma39652b[m Add ADR docs (structure and example)
+[33m0123983[m Update PROBLEMAS.md
+[33m3c41421[m Add .gitignore to ignore macOS .DS_Store
+[33m3dd7b6b[m Update PROBLEMAS.md
+[33m932476f[m atualizacao
+[33m7768240[m Swap roles of João Silva and Maria Souza
+[33m576796a[m Atualização
+[33m8d6c80c[m Add project documentation for Equipment Loan System
+[33m055fd0a[m Update requisitos.md with interface requirements
+[33m6bcc37f[m Adiciona casos de uso para gestão de empréstimos
+[33m0a73400[m Add requirements document for equipment loan system
+[33me2b3c88[m Add vision document for Equipment Loan Management System
+[33mdaa69b7[m Add initial README for equipment loan management system
+[33ma4c90e0[m Adicionar sistema de empréstimos de equipamentos
