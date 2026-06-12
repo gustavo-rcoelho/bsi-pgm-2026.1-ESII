@@ -1,15 +1,17 @@
 from repositorios.interfaces import IRepositorioEmprestimo
-from models.equipamento import Notebook, Projetor, Cabo
+from models.fabrica_equipamento import FabricaEquipamento
 from models.emprestimo import Emprestimo
 import datetime
 
 class RepositorioEmprestimo(IRepositorioEmprestimo):
 
     def __init__(self):
+        criar = FabricaEquipamento.criar
+        
         self.equipamentos = [
-            Notebook(1, "Notebook Dell", "notebook", True),
-            Projetor(2, "Projetor Epson", "projetor", True),
-            Cabo(3, "Cabo HDMI", "cabo", True)
+            criar("notebook", 1, "Notebook Dell"),
+            criar("projetor", 2, "Projetor Epson"),
+            criar("cabo", 3, "Cabo HDMI")
         ]
         self.emprestimos = []
 
