@@ -1,19 +1,15 @@
-from repositorios.repositorio_emprestimo import RepositorioEmprestimo
-from services.notificador import Notificador
-from services.servico_emprestimo import ServicoEmprestimo
+from app.sistema import SistemaDeEmprestimos
 
 
 def main():
-    repositorio = RepositorioEmprestimo()
-    notificador = Notificador()
-    servico     = ServicoEmprestimo(repositorio, notificador)
+    sistema = SistemaDeEmprestimos()
 
     while True:
         print("\n1-Registrar  2-Devolver  3-Atrasados  0-Sair")
         opcao = input("Opção: ")
 
         if opcao == "1":
-            ok = servico.registrar(
+            ok = sistema.registrar(
                 int(input("ID equipamento: ")),
                 input("Nome: "),
                 input("Email: "),
@@ -26,7 +22,7 @@ def main():
                 print("Equipamento inválido ou indisponível.")
 
         elif opcao == "2":
-            multa = servico.devolver(int(input("ID empréstimo: ")))
+            multa = sistema.devolver(int(input("ID empréstimo: ")))
 
             if multa is None:
                 print("Empréstimo inválido ou já devolvido.")
@@ -34,7 +30,7 @@ def main():
                 print(f"Devolução registrada. Multa: R${multa:.2f}")
 
         elif opcao == "3":
-            atrasados = servico.listar_atrasados()
+            atrasados = sistema.listar_atrasados()
 
             if not atrasados:
                 print("Nenhum empréstimo em atraso.")
