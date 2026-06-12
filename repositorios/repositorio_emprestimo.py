@@ -6,6 +6,7 @@ import datetime
 class RepositorioEmprestimo(IRepositorioEmprestimo):
 
     def __init__(self):
+        
         criar = FabricaEquipamento.criar
         
         self.equipamentos = [
