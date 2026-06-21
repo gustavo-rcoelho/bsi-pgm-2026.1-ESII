@@ -3,7 +3,7 @@ import pytest
 from models.fabrica_equipamento import FabricaEquipamento
 from services.servico_emprestimo import ServicoEmprestimo
 from repositorios.interfaces import IRepositorioEmprestimo
-from services.interfaces import INotificador
+from services.observer import Observer
 
 
 class RepositorioFake(IRepositorioEmprestimo):
@@ -68,26 +68,13 @@ class RepositorioFake(IRepositorioEmprestimo):
         return self._emprestimos
 
 
-class NotificadorSpy(INotificador):
+class NotificadorSpy(Observer):
 
     def __init__(self):
         self.eventos = []
 
-    def notificar_emprestimo(self, email, data_devolucao):
-        self.eventos.append(
-            ("emprestimo", email, data_devolucao)
-        )
-
-    def notificar_devolucao(self, email, multa):
-        self.eventos.append(
-            ("devolucao", email, multa)
-        )
-
-    def notificar_atraso(self, email):
-        self.eventos.append(
-            ("atraso", email)
-        )
-
+    def update(self, evento):
+        self.eventos.append(evento)
 
 @pytest.fixture
 def repositorio_fake():
@@ -101,7 +88,12 @@ def notificador_spy():
 
 @pytest.fixture
 def servico(repositorio_fake, notificador_spy):
-    return ServicoEmprestimo(
-        repositorio_fake,
+    s = ServicoEmprestimo(
+        repositorio_fake
+    )
+
+    s.registrar_observer(
         notificador_spy
     )
+
+    return s

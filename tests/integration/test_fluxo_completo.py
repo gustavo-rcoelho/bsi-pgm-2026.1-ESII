@@ -1,15 +1,18 @@
 from repositorios.repositorio_emprestimo import RepositorioEmprestimo
-from services.notificador import Notificador
+from services.notificador_email import NotificadorEmail
 from services.servico_emprestimo import ServicoEmprestimo
 
 
 def test_fluxo_registrar_devolver_com_componentes_reais():
 
     repositorio = RepositorioEmprestimo()
-    notificador = Notificador()
+
     servico = ServicoEmprestimo(
-        repositorio,
-        notificador
+        repositorio
+    )
+
+    servico.registrar_observer(
+        NotificadorEmail()
     )
 
     sucesso = servico.registrar(

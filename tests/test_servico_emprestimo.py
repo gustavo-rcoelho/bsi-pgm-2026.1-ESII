@@ -2,6 +2,7 @@
 import datetime
 import pytest
 from models.equipamento import Notebook
+from models.fabrica_equipamento import FabricaEquipamento
 
 
 def test_registrar_devolve_true_quando_equipamento_disponivel(
@@ -46,7 +47,16 @@ def test_registrar_notifica_usuario_apos_sucesso(
     )
 
     assert len(notificador_spy.eventos) == 1
-    assert notificador_spy.eventos[0][0] == "emprestimo"
+
+    assert (
+        notificador_spy.eventos[0]["tipo"]
+        == "emprestimo"
+    )
+
+    assert (
+        notificador_spy.eventos[0]["email"]
+        == "ana@email.com"
+    )
 
 
 @pytest.mark.parametrize(
@@ -127,22 +137,40 @@ def test_usuario_com_tres_emprestimos_nao_pode_registrar_quarto(
     servico.registrar(1, "Ana", "ana@x.com", 7)
 
     repositorio_fake._equipamentos.append(
-    Notebook(4, "Notebook Extra", "notebook", True)
+    FabricaEquipamento.criar(
+        "notebook",
+        4,
+        "Notebook Extra"
     )
+)
 
     servico.registrar(4, "Ana", "ana@x.com", 7)
 
     repositorio_fake._equipamentos.append(
-    Notebook(5, "Notebook Extra 2", "notebook", True)
+        FabricaEquipamento.criar(
+            "notebook",
+            5,
+            "Notebook Extra 2"
+        )
     )
 
     servico.registrar(5, "Ana", "ana@x.com", 7)
 
+
     repositorio_fake._equipamentos.append(
-    Notebook(6, "Notebook Extra 3", "notebook", True)
+        FabricaEquipamento.criar(
+            "notebook",
+            6,
+            "Notebook Extra 3"
+        )
     )
 
-    resultado = servico.registrar(6, "Ana", "ana@x.com", 7)
+    resultado = servico.registrar(
+        6,
+        "Ana",
+        "ana@x.com",
+        7
+    )
 
     assert resultado is False
 
@@ -153,22 +181,39 @@ def test_usuario_pode_registrar_novo_emprestimo_apos_devolucao(
     servico.registrar(1, "Ana", "ana@x.com", 7)
 
     repositorio_fake._equipamentos.append(
-        Notebook(4, "Notebook Extra", "notebook", True)
+    FabricaEquipamento.criar(
+        "notebook",
+        4,
+        "Notebook Extra"
     )
+)
     servico.registrar(4, "Ana", "ana@x.com", 7)
 
     repositorio_fake._equipamentos.append(
-        Notebook(5, "Notebook Extra 2", "notebook", True)
+        FabricaEquipamento.criar(
+            "notebook",
+            5,
+            "Notebook Extra 2"
+        )
     )
     servico.registrar(5, "Ana", "ana@x.com", 7)
 
     servico.devolver(1)
 
     repositorio_fake._equipamentos.append(
-        Notebook(6, "Notebook Extra 3", "notebook", True)
+        FabricaEquipamento.criar(
+            "notebook",
+            6,
+            "Notebook Extra 3"
+        )
     )
 
-    resultado = servico.registrar(6, "Ana", "ana@x.com", 7)
+    resultado = servico.registrar(
+        6,
+        "Ana",
+        "ana@x.com",
+        7
+    )
 
     assert resultado is True
     
@@ -179,17 +224,29 @@ def test_limite_de_emprestimos_e_por_usuario(
     servico.registrar(1, "Ana", "ana@x.com", 7)
 
     repositorio_fake._equipamentos.append(
-        Notebook(4, "Notebook Extra", "notebook", True)
+        FabricaEquipamento.criar(
+            "notebook",
+            4,
+            "Notebook Extra"
+        )
     )
     servico.registrar(4, "Ana", "ana@x.com", 7)
 
     repositorio_fake._equipamentos.append(
-        Notebook(5, "Notebook Extra 2", "notebook", True)
+        FabricaEquipamento.criar(
+            "notebook",
+            5,
+            "Notebook Extra 2"
+        )
     )
     servico.registrar(5, "Ana", "ana@x.com", 7)
 
     repositorio_fake._equipamentos.append(
-        Notebook(6, "Notebook João", "notebook", True)
+        FabricaEquipamento.criar(
+            "notebook",
+            6,
+            "Notebook João"
+        )
     )
 
     resultado = servico.registrar(
