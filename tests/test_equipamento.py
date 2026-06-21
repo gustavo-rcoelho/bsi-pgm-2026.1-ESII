@@ -1,18 +1,19 @@
 import pytest
-from models.equipamento import Notebook, Projetor, Cabo
+
+from models.fabrica_equipamento import FabricaEquipamento
 
 
 @pytest.mark.parametrize(
     "equipamento,dias,multa",
     [
-        (Notebook(1, "Dell", "notebook", True), 3, 30.0),
-        (Notebook(1, "Dell", "notebook", True), 5, 50.0),
+        (FabricaEquipamento.criar("notebook", 1, "Dell"), 3, 30.0),
+        (FabricaEquipamento.criar("notebook", 1, "Dell"), 5, 50.0),
 
-        (Projetor(2, "Epson", "projetor", True), 2, 30.0),
-        (Projetor(2, "Epson", "projetor", True), 4, 60.0),
+        (FabricaEquipamento.criar("projetor", 2, "Epson"), 2, 30.0),
+        (FabricaEquipamento.criar("projetor", 2, "Epson"), 4, 60.0),
 
-        (Cabo(3, "HDMI", "cabo", True), 3, 6.0),
-        (Cabo(3, "HDMI", "cabo", True), 5, 10.0),
+        (FabricaEquipamento.criar("cabo", 3, "HDMI"), 3, 6.0),
+        (FabricaEquipamento.criar("cabo", 3, "HDMI"), 5, 10.0),
     ]
 )
 def test_calcular_multa_atraso_positivo(
@@ -26,9 +27,9 @@ def test_calcular_multa_atraso_positivo(
 @pytest.mark.parametrize(
     "equipamento",
     [
-        Notebook(1, "Dell", "notebook", True),
-        Projetor(2, "Epson", "projetor", True),
-        Cabo(3, "HDMI", "cabo", True),
+        FabricaEquipamento.criar("notebook", 1, "Dell"),
+        FabricaEquipamento.criar("projetor", 2, "Epson"),
+        FabricaEquipamento.criar("cabo", 3, "HDMI"),
     ]
 )
 def test_calcular_multa_atraso_negativo_retorna_zero(

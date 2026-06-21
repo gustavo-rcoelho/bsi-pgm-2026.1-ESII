@@ -1,6 +1,6 @@
 import pytest
 
-from models.equipamento import Notebook, Projetor, Cabo
+from models.fabrica_equipamento import FabricaEquipamento
 from services.servico_emprestimo import ServicoEmprestimo
 from repositorios.interfaces import IRepositorioEmprestimo
 from services.interfaces import INotificador
@@ -10,9 +10,23 @@ class RepositorioFake(IRepositorioEmprestimo):
 
     def __init__(self):
         self._equipamentos = [
-            Notebook(1, "Notebook Dell", "notebook", True),
-            Projetor(2, "Projetor Epson", "projetor", True),
-            Cabo(3, "Cabo HDMI", "cabo", True)
+            FabricaEquipamento.criar(
+                "notebook",
+                 1,
+                "Notebook Dell"
+            ),
+    
+            FabricaEquipamento.criar(
+                "projetor",
+                2,
+                "Projetor Epson"
+            ),
+            
+            FabricaEquipamento.criar(
+                "cabo",
+                3,
+                "Cabo HDMI"
+            )
         ]
         self._emprestimos = []
 
