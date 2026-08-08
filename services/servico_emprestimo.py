@@ -19,12 +19,12 @@ class ServicoEmprestimo(Subject):
 
         return contador
 
-    def registrar(self, equip_id, nome, email, dias):
+    def registrar(self, equipamento_id, nome, email, dias):
 
         if self._contar_emprestimos_abertos(email) >= 3:
             return False
 
-        equipamento = self.repo.buscar_equipamento(equip_id)
+        equipamento = self.repo.buscar_equipamento(equipamento_id)
 
         if equipamento is None or not equipamento.disponivel:
             return False
@@ -34,7 +34,7 @@ class ServicoEmprestimo(Subject):
 
         emprestimo = Emprestimo(
             id=len(self.repo.emprestimos) + 1,
-            equipamento_id=equip_id,
+            equipamento_id=equipamento_id,
             equipamento_nome=equipamento.nome,
             tipo=equipamento.tipo,
             usuario_nome=nome,
@@ -45,7 +45,7 @@ class ServicoEmprestimo(Subject):
         )
 
         self.repo.salvar_emprestimo(emprestimo)
-        self.repo.marcar_indisponivel(equip_id)
+        self.repo.marcar_indisponivel(equipamento_id)
 
         self.notificar(
             Evento(
