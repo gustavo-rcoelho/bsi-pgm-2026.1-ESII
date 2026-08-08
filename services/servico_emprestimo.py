@@ -106,12 +106,7 @@ class ServicoEmprestimo(Subject):
 
                 atrasos.append((emp, atraso, multa))
 
-                self.notificar(
-                    Evento(
-                        tipo="atraso",
-                        email=emp.usuario_email
-                    )
-                )
+                self._notificar_atraso(emp)
 
         if len(atrasos) == 0:
             return []
@@ -127,3 +122,11 @@ class ServicoEmprestimo(Subject):
         )
 
         return equipamento.calcular_multa(atraso)
+    
+    def _notificar_atraso(self, emprestimo):
+        self.notificar(
+            Evento(
+                tipo="atraso",
+                email=emprestimo.usuario_email
+            )
+        )
