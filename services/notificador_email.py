@@ -1,23 +1,22 @@
 from services.observer import Observer
+from services.evento import Evento
 
 
 class NotificadorEmail(Observer):
-
-    def update(self, evento: dict) -> None:
-
-        if evento["tipo"] == "emprestimo":
+    def update(self, evento: Evento) -> None:
+        if evento.tipo == "emprestimo":
             print(
-                f"[EMAIL] {evento['email']} — empréstimo até "
-                f"{evento['data']}"
+                f"[EMAIL] {evento.email} — empréstimo até "
+                f"{evento.data}"
             )
 
-        elif evento["tipo"] == "devolucao":
+        elif evento.tipo == "devolucao":
             print(
-                f"[EMAIL] {evento['email']} — multa "
-                f"R${evento['multa']:.2f}"
+                f"[EMAIL] {evento.email} — multa "
+                f"R${evento.multa:.2f}"
             )
 
-        elif evento["tipo"] == "atraso":
+        elif evento.tipo == "atraso":
             print(
-                f"[EMAIL] {evento['email']} — você está em atraso!"
+                f"[EMAIL] {evento.email} — você está em atraso!"
             )

@@ -4,6 +4,7 @@ from models.fabrica_equipamento import FabricaEquipamento
 from services.servico_emprestimo import ServicoEmprestimo
 from repositorios.interfaces import IRepositorioEmprestimo
 from services.observer import Observer
+from services.evento import Evento
 
 
 class RepositorioFake(IRepositorioEmprestimo):
@@ -73,7 +74,7 @@ class NotificadorSpy(Observer):
     def __init__(self):
         self.eventos = []
 
-    def update(self, evento):
+    def update(self, evento: Evento):
         self.eventos.append(evento)
 
 @pytest.fixture

@@ -1,25 +1,28 @@
 from models.emprestimo import Emprestimo
 from services.observer import Subject
+from services.evento import Evento
 import datetime
+
 
 class ServicoEmprestimo(Subject):
 
     def __init__(self, repositorio):
         super().__init__()
         self.repo = repositorio
-        
+
     def _contar_emprestimos_abertos(self, email):
         contador = 0
-        
+
         for emp in self.repo.listar_emprestimos():
             if emp.usuario_email == email and not emp.devolvido:
                 contador += 1
+
         return contador
-    
+
     def registrar(self, equip_id, nome, email, dias):
-        
+
         if self._contar_emprestimos_abertos(email) >= 3:
-            return False    
+            return False
 
         equipamento = self.repo.buscar_equipamento(equip_id)
 
@@ -44,11 +47,13 @@ class ServicoEmprestimo(Subject):
         self.repo.salvar_emprestimo(emprestimo)
         self.repo.marcar_indisponivel(equip_id)
 
-        self.notificar({
-            "tipo": "emprestimo",
-            "email": email,
-            "data": data_devolucao
-        })
+        self.notificar(
+            Evento(
+                tipo="emprestimo",
+                email=email,
+                data=data_devolucao
+            )
+        )
 
         return True
 
@@ -57,22 +62,27 @@ class ServicoEmprestimo(Subject):
         emprestimo = self.repo.buscar_emprestimo(emprestimo_id)
 
         if emprestimo is None or emprestimo.devolvido:
-            return None  
+            return None
 
         hoje = datetime.date.today()
         atraso = (hoje - emprestimo.data_devolucao).days
 
-        equipamento = self.repo.buscar_equipamento(emprestimo.equipamento_id)
+        equipamento = self.repo.buscar_equipamento(
+            emprestimo.equipamento_id
+        )
+
         multa = equipamento.calcular_multa(atraso)
 
         self.repo.marcar_devolvido(emprestimo_id)
         self.repo.marcar_disponivel(emprestimo.equipamento_id)
 
-        self.notificar({
-            "tipo": "devolucao",
-            "email": emprestimo.usuario_email,
-            "multa": multa
-        })
+        self.notificar(
+            Evento(
+                tipo="devolucao",
+                email=emprestimo.usuario_email,
+                multa=multa
+            )
+        )
 
         return multa
 
@@ -87,16 +97,21 @@ class ServicoEmprestimo(Subject):
             if not emp.devolvido and emp.data_devolucao < hoje:
 
                 atraso = (hoje - emp.data_devolucao).days
-                equipamento = self.repo.buscar_equipamento(emp.equipamento_id)
+
+                equipamento = self.repo.buscar_equipamento(
+                    emp.equipamento_id
+                )
 
                 multa = equipamento.calcular_multa(atraso)
 
                 atrasos.append((emp, atraso, multa))
 
-                self.notificar({
-                    "tipo": "atraso",
-                    "email": emp.usuario_email
-                })
+                self.notificar(
+                    Evento(
+                        tipo="atraso",
+                        email=emp.usuario_email
+                    )
+                )
 
         if len(atrasos) == 0:
             return []
@@ -106,5 +121,9 @@ class ServicoEmprestimo(Subject):
     def calcular_multa(self, emprestimo):
         hoje = datetime.date.today()
         atraso = (hoje - emprestimo.data_devolucao).days
-        equipamento = self.repo.buscar_equipamento(emprestimo.equipamento_id)
+
+        equipamento = self.repo.buscar_equipamento(
+            emprestimo.equipamento_id
+        )
+
         return equipamento.calcular_multa(atraso)

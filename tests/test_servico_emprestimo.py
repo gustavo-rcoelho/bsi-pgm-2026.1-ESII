@@ -49,12 +49,12 @@ def test_registrar_notifica_usuario_apos_sucesso(
     assert len(notificador_spy.eventos) == 1
 
     assert (
-        notificador_spy.eventos[0]["tipo"]
+        notificador_spy.eventos[0].tipo
         == "emprestimo"
     )
 
     assert (
-        notificador_spy.eventos[0]["email"]
+        notificador_spy.eventos[0].email
         == "ana@email.com"
     )
 
