@@ -1,5 +1,6 @@
 from services.interfaces import INotificador
 
+
 class Notificador(INotificador):
 
     def notificar_emprestimo(self, email, data_devolucao):

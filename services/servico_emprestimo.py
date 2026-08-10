@@ -1,7 +1,8 @@
-from models.emprestimo import Emprestimo
-from services.observer import Subject
-from services.evento import Evento
 import datetime
+
+from models.emprestimo import Emprestimo
+from services.evento import Evento
+from services.observer import Subject
 
 
 class ServicoEmprestimo(Subject):
@@ -122,7 +123,7 @@ class ServicoEmprestimo(Subject):
         )
 
         return equipamento.calcular_multa(atraso)
-    
+
     def _notificar_atraso(self, emprestimo):
         self.notificar(
             Evento(

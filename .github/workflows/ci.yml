@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  qualidade:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,5 +18,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
 
-      - name: Run tests with coverage
-        run: pytest --cov=. --cov-report=term-missing
+      - name: Lint
+        run: ruff check .
+
+      - name: Tests + coverage gate
+        run: pytest --cov=. --cov-report=term-missing --cov-fail-under=80

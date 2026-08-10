@@ -1,10 +1,10 @@
 import pytest
 
 from models.fabrica_equipamento import FabricaEquipamento
-from services.servico_emprestimo import ServicoEmprestimo
 from repositorios.interfaces import IRepositorioEmprestimo
-from services.observer import Observer
 from services.evento import Evento
+from services.observer import Observer
+from services.servico_emprestimo import ServicoEmprestimo
 
 
 class RepositorioFake(IRepositorioEmprestimo):
@@ -16,13 +16,13 @@ class RepositorioFake(IRepositorioEmprestimo):
                  1,
                 "Notebook Dell"
             ),
-    
+
             FabricaEquipamento.criar(
                 "projetor",
                 2,
                 "Projetor Epson"
             ),
-            
+
             FabricaEquipamento.criar(
                 "cabo",
                 3,

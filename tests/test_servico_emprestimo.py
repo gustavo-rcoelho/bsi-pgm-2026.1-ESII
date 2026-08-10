@@ -1,7 +1,8 @@
 #test_servico_emprestimo
 import datetime
+
 import pytest
-from models.equipamento import Notebook
+
 from models.fabrica_equipamento import FabricaEquipamento
 
 
@@ -216,7 +217,7 @@ def test_usuario_pode_registrar_novo_emprestimo_apos_devolucao(
     )
 
     assert resultado is True
-    
+
 def test_limite_de_emprestimos_e_por_usuario(
     servico,
     repositorio_fake

@@ -1,7 +1,6 @@
 import datetime
 
 from app.sistema import SistemaDeEmprestimos
-from models.emprestimo import Emprestimo
 from services.notificador import Notificador
 from services.notificador_email import NotificadorEmail
 

@@ -1,5 +1,5 @@
-from services.observer import Observer
 from services.evento import Evento
+from services.observer import Observer
 
 
 class NotificadorEmail(Observer):
